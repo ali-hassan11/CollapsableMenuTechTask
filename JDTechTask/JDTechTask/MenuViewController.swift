@@ -7,7 +7,7 @@
 
 import UIKit
 
-private class MenuSection {
+class MenuSection {
     let title: String
     let options: [String]
     var isOpended: Bool
@@ -42,6 +42,15 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             MenuSection(title: "Section 3", options: [1, 2, 3].map { "Option \($0)" } ),
             MenuSection(title: "Section 4", options: [1, 2, 3].map { "Option \($0)" } )
         ]
+        
+        MenuItemsProvider().fetchMenuOptions { result in
+            switch result {
+            case .success(let sections):
+                print(sections)
+            case.failure(let error):
+                print(error)
+            }
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
