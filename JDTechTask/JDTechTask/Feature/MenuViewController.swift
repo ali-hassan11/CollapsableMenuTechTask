@@ -7,34 +7,9 @@
 
 import UIKit
 
-enum NavigationType {
-    case category
-    case link
-    case noLink
-    case infoPage
-    case custom
-    case unknown
-}
-
-struct MenuSection {
-    let title: String
-    let options: [MenuSectionChild]?
-    let navigation: MenuNavigation
-    var isOpended: Bool = false
-}
-
-struct MenuSectionChild {
-    let name: String
-    let navigation: MenuNavigation
-}
-
-struct MenuNavigation {
-    let type: NavigationType
-    let URI: String?
-}
-
-class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MenuViewController: UIViewController {
     
+    private let menuItemsProvider: MenuItemsProvider
     private var sections = [MenuSection]()
     
     private let tableView: UITableView = {
@@ -43,6 +18,15 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return tableView
     }()
     
+    init(menuItemsProvider: MenuItemsProvider) {
+        self.menuItemsProvider = menuItemsProvider
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
@@ -50,7 +34,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
 
-        MenuItemsProvider().fetchMenuOptions { result in
+        menuItemsProvider.fetchMenuOptions { result in
             
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -64,6 +48,10 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
     }
+    
+}
+
+extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count

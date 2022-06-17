@@ -19,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let viewController = MenuViewController()
-        viewController.view.backgroundColor = .blue
+        let viewController = MenuViewController(menuItemsProvider: MenuItemsProvider())
         window.rootViewController = viewController
         self.window = window
         window.makeKeyAndVisible()
