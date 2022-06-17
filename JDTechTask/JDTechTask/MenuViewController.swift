@@ -7,16 +7,30 @@
 
 import UIKit
 
-class MenuSection {
+enum NavigationType {
+    case category
+    case link
+    case noLink
+    case infoPage
+    case custom
+    case unknown
+}
+
+struct MenuSection {
     let title: String
-    let options: [String]
-    var isOpended: Bool
-    
-    init(title: String, options: [String], isOpended: Bool = false) {
-        self.title = title
-        self.options = options
-        self.isOpended = isOpended
-    }
+    let options: [MenuSectionChild]?
+    let navigation: MenuNavigation
+    var isOpended: Bool = false
+}
+
+struct MenuSectionChild {
+    let name: String
+    let navigation: MenuNavigation
+}
+
+struct MenuNavigation {
+    let type: NavigationType
+    let URI: String?
 }
 
 class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -35,20 +49,18 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
-        
-        sections = [
-            MenuSection(title: "Section 1", options: [1, 2, 3].map { "Option \($0)" } ),
-            MenuSection(title: "Section 2", options: [1, 2, 3].map { "Option \($0)" } ),
-            MenuSection(title: "Section 3", options: [1, 2, 3].map { "Option \($0)" } ),
-            MenuSection(title: "Section 4", options: [1, 2, 3].map { "Option \($0)" } )
-        ]
-        
+
         MenuItemsProvider().fetchMenuOptions { result in
-            switch result {
-            case .success(let sections):
-                print(sections)
-            case.failure(let error):
-                print(error)
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch result {
+                case .success(let sections):
+                    self.sections = sections
+                    self.tableView.reloadData()
+                case.failure(let error):
+                    print(error)
+                }
             }
         }
     }
@@ -60,8 +72,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = sections[section]
         
-        if section.isOpended {
-            return section.options.count + 1
+        if let options = section.options , section.isOpended {
+            return options.count + 1
         } else {
             return 1
         }
@@ -70,11 +82,12 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let section = sections[indexPath.section]
         
         if indexPath.row == 0 {
-            cell.textLabel?.text = sections[indexPath.section].title
-        } else {
-            cell.textLabel?.text = sections[indexPath.section].options[indexPath.row - 1]
+            cell.textLabel?.text = section.title
+        } else if let options = section.options {
+            cell.textLabel?.text = options[indexPath.row - 1].name
         }
         
         return cell
