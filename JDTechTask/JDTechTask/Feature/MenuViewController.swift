@@ -65,7 +65,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = sections[section]
         
-        if let options = section.options , section.isOpended {
+        if let options = section.options, section.isOpended {
             return options.count + 1
         } else {
             return 1
@@ -79,8 +79,12 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.row == 0 {
             cell.textLabel?.text = section.title
+            cell.backgroundColor = UIColor(red: 18/255, green: 24/255, blue: 24/255, alpha: 1)
+            cell.textLabel?.textColor = .white
         } else if let options = section.options {
             cell.textLabel?.text = options[indexPath.row - 1].name
+            cell.backgroundColor = UIColor(red: 30/255, green: 36/255, blue: 36/255, alpha: 1)
+            cell.textLabel?.textColor = .white
         }
         
         return cell

@@ -9,11 +9,12 @@ import Foundation
 
 struct Navigation: Decodable {
     let type: String
+    let search: String?
     let target: String?
     let URI: String?
     
     func transform() -> MenuNavigation {
-        return MenuNavigation(type: self.navigationType(), target: target, URI: URI)
+        return MenuNavigation(type: navigationType(), search: search, target: target, URI: URI)
     }
     
     func navigationType() -> NavigationType {
@@ -26,6 +27,8 @@ struct Navigation: Decodable {
             return .noLink
         case "INFO_PAGE":
             return .infoPage
+        case "SEARCH":
+            return .search
         case "CUSTOM":
             return .custom
         default:

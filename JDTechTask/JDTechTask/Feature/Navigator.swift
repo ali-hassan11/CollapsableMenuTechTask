@@ -19,21 +19,27 @@ struct MenuNavigator {
         
         switch navigationItem.type {
         case .link:
-            guard let url = URLBuilder.buildUrl(uri: navigationItem.URI) else { return }
-            navigationController.pushViewController(WebsiteViewController(url: url), animated: true)
+            pushWebPage(uri: navigationItem.URI)
         case .noLink:
             print("noLink")
         case .category:
-            guard let url = URLBuilder.buildUrl(uri: navigationItem.URI) else { return }
-            navigationController.pushViewController(WebsiteViewController(url: url), animated: true)
+            pushWebPage(uri: navigationItem.URI)
         case .infoPage:
             guard let target = navigationItem.target else { return }
             print("Navigate to target: \(target)")
         case .custom:
             guard let target = navigationItem.target else { return }
             print("Navigate to target: \(target)")
+        case .search:
+            pushWebPage(uri: navigationItem.URI)
         case .unknown:
             fatalError("Unkown navigation type: Unable to handle")
         }
+
+    }
+    
+    private func pushWebPage(uri: String?) {
+        guard let url = URLBuilder.buildUrl(uri: uri) else { return }
+        navigationController.pushViewController(WebsiteViewController(url: url), animated: true)
     }
 }

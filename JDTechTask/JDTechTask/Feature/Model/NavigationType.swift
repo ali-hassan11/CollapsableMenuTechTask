@@ -12,6 +12,7 @@ enum NavigationType {
     case link
     case noLink
     case infoPage
+    case search
     case custom
     case unknown
 }
