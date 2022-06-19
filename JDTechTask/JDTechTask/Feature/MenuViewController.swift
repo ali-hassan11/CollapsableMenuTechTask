@@ -10,6 +10,8 @@ import UIKit
 class MenuViewController: UIViewController {
     
     private let menuItemsProvider: MenuItemsProvider
+    private var navigator: MenuNavigator?
+    
     private var sections = [MenuSection]()
     
     private let tableView: UITableView = {
@@ -29,6 +31,9 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let navigationController = self.navigationController else { return }
+        self.navigator = MenuNavigator(navigationController: navigationController)
+        
         view.addSubview(tableView)
         tableView.frame = view.bounds
         tableView.delegate = self
@@ -84,9 +89,15 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard indexPath.row == 0 else { return }
-        sections[indexPath.section].isOpended.toggle()
-        tableView.reloadSections([indexPath.section], with: .automatic)
+        if indexPath.row == 0, sections[indexPath.section].options != nil {
+            sections[indexPath.section].isOpended.toggle()
+            tableView.reloadSections([indexPath.section], with: .automatic)
+        } else if indexPath.row == 0, sections[indexPath.section].options == nil {
+            let selectedItem = sections[indexPath.section].navigation
+            navigator?.navigate(to: selectedItem)
+        } else {
+            guard let selectedItem = sections[indexPath.section].options?[indexPath.row - 1].navigation else { return }
+            navigator?.navigate(to: selectedItem)
+        }
     }
 }
-

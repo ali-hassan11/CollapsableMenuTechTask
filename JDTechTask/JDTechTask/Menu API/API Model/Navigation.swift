@@ -8,24 +8,25 @@
 import Foundation
 
 struct Navigation: Decodable {
-    let URI: String?
     let type: String
+    let target: String?
+    let URI: String?
     
     func transform() -> MenuNavigation {
-        return MenuNavigation(type: self.navigationType(), URI: URI)
+        return MenuNavigation(type: self.navigationType(), target: target, URI: URI)
     }
     
     func navigationType() -> NavigationType {
         switch type {
-        case "category":
+        case "CATEGORY":
             return .category
-        case "link":
+        case "LINK":
             return .link
-        case "noLink":
+        case "NO_LINK":
             return .noLink
-        case "infoPage":
+        case "INFO_PAGE":
             return .infoPage
-        case "custom":
+        case "CUSTOM":
             return .custom
         default:
             return .unknown
