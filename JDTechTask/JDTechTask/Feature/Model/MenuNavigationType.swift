@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NavigationType {
+enum MenuNavigationType {
     case category
     case link
     case noLink

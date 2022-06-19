@@ -8,7 +8,7 @@
 import Foundation
 
 struct Root: Decodable {
-    let sections: [NavigationSection]
+    let sections: [Section]
     
     enum CodingKeys: String, CodingKey {
         case sections = "nav"

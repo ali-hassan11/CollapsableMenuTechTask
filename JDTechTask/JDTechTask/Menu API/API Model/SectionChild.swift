@@ -7,15 +7,13 @@
 
 import Foundation
 
-struct NavigationChild: Decodable {
+struct SectionChild: Decodable {
     let name: String
-    let children: [NavigationChild]?
     let navigation: Navigation
     
     func transform() -> MenuSectionChild {
       
         return MenuSectionChild(name: name,
-                                options: children?.map { $0.transform() },
                                 navigation: navigation.transform())
     }
 }

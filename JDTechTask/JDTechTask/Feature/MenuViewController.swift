@@ -9,8 +9,8 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    private let menuItemsProvider: MenuItemsProvider
-    private var navigator: MenuNavigator?
+    private let menuItemsProvider: MenuItemsProviderProtocol
+    private var navigator: NavigatorProtocol?
     
     private var sections = [MenuSection]()
     
@@ -20,7 +20,7 @@ class MenuViewController: UIViewController {
         return tableView
     }()
     
-    init(menuItemsProvider: MenuItemsProvider) {
+    init(menuItemsProvider: MenuItemsProviderProtocol) {
         self.menuItemsProvider = menuItemsProvider
         super.init(nibName: nil, bundle: nil)
     }
@@ -53,7 +53,6 @@ class MenuViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension MenuViewController: UITableViewDataSource, UITableViewDelegate {

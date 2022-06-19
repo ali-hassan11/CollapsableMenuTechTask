@@ -17,7 +17,7 @@ struct Navigation: Decodable {
         return MenuNavigation(type: navigationType(), search: search, target: target, URI: URI)
     }
     
-    func navigationType() -> NavigationType {
+    func navigationType() -> MenuNavigationType {
         switch type {
         case "CATEGORY":
             return .category

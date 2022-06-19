@@ -17,10 +17,10 @@
 		6F2D5109285C06F4002EB630 /* NavigationChildDecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D5108285C06F4002EB630 /* NavigationChildDecodableTests.swift */; };
 		6F2D510D285CFAD0002EB630 /* MenuItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D510C285CFAD0002EB630 /* MenuItemsProvider.swift */; };
 		6F2D5110285CFB28002EB630 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D510F285CFB27002EB630 /* Root.swift */; };
-		6F2D5112285CFB3F002EB630 /* NavigationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D5111285CFB3F002EB630 /* NavigationSection.swift */; };
-		6F2D5114285CFB55002EB630 /* NavigationChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D5113285CFB55002EB630 /* NavigationChild.swift */; };
+		6F2D5112285CFB3F002EB630 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D5111285CFB3F002EB630 /* Section.swift */; };
+		6F2D5114285CFB55002EB630 /* SectionChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D5113285CFB55002EB630 /* SectionChild.swift */; };
 		6F2D5116285CFB89002EB630 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D5115285CFB89002EB630 /* Navigation.swift */; };
-		6F2D5118285CFF69002EB630 /* NavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D5117285CFF69002EB630 /* NavigationType.swift */; };
+		6F2D5118285CFF69002EB630 /* MenuNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D5117285CFF69002EB630 /* MenuNavigationType.swift */; };
 		6F2D511A285CFF75002EB630 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D5119285CFF75002EB630 /* MenuSection.swift */; };
 		6F2D511C285CFF81002EB630 /* MenuSectionChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D511B285CFF81002EB630 /* MenuSectionChild.swift */; };
 		6F2D511E285CFF93002EB630 /* MenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D511D285CFF93002EB630 /* MenuNavigation.swift */; };
@@ -55,10 +55,10 @@
 		6F2D5108285C06F4002EB630 /* NavigationChildDecodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationChildDecodableTests.swift; sourceTree = "<group>"; };
 		6F2D510C285CFAD0002EB630 /* MenuItemsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemsProvider.swift; sourceTree = "<group>"; };
 		6F2D510F285CFB27002EB630 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
-		6F2D5111285CFB3F002EB630 /* NavigationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSection.swift; sourceTree = "<group>"; };
-		6F2D5113285CFB55002EB630 /* NavigationChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationChild.swift; sourceTree = "<group>"; };
+		6F2D5111285CFB3F002EB630 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		6F2D5113285CFB55002EB630 /* SectionChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionChild.swift; sourceTree = "<group>"; };
 		6F2D5115285CFB89002EB630 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
-		6F2D5117285CFF69002EB630 /* NavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationType.swift; sourceTree = "<group>"; };
+		6F2D5117285CFF69002EB630 /* MenuNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNavigationType.swift; sourceTree = "<group>"; };
 		6F2D5119285CFF75002EB630 /* MenuSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		6F2D511B285CFF81002EB630 /* MenuSectionChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSectionChild.swift; sourceTree = "<group>"; };
 		6F2D511D285CFF93002EB630 /* MenuNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNavigation.swift; sourceTree = "<group>"; };
@@ -155,8 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				6F2D510F285CFB27002EB630 /* Root.swift */,
-				6F2D5111285CFB3F002EB630 /* NavigationSection.swift */,
-				6F2D5113285CFB55002EB630 /* NavigationChild.swift */,
+				6F2D5111285CFB3F002EB630 /* Section.swift */,
+				6F2D5113285CFB55002EB630 /* SectionChild.swift */,
 				6F2D5115285CFB89002EB630 /* Navigation.swift */,
 			);
 			path = "API Model";
@@ -165,10 +165,10 @@
 		6F2D511F285CFFD9002EB630 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6F2D5117285CFF69002EB630 /* NavigationType.swift */,
+				6F2D5117285CFF69002EB630 /* MenuNavigationType.swift */,
 				6F2D5119285CFF75002EB630 /* MenuSection.swift */,
-				6F2D511D285CFF93002EB630 /* MenuNavigation.swift */,
 				6F2D511B285CFF81002EB630 /* MenuSectionChild.swift */,
+				6F2D511D285CFF93002EB630 /* MenuNavigation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -272,14 +272,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F2D5112285CFB3F002EB630 /* NavigationSection.swift in Sources */,
+				6F2D5112285CFB3F002EB630 /* Section.swift in Sources */,
 				6F2D50DB285BC2EC002EB630 /* MenuViewController.swift in Sources */,
 				6F2D5107285BF348002EB630 /* MenuItemsMapper.swift in Sources */,
 				6F2D510D285CFAD0002EB630 /* MenuItemsProvider.swift in Sources */,
 				6F2D50D7285BC2EC002EB630 /* AppDelegate.swift in Sources */,
 				6F677A73285F615B003439B9 /* URLBuilder.swift in Sources */,
-				6F2D5118285CFF69002EB630 /* NavigationType.swift in Sources */,
-				6F2D5114285CFB55002EB630 /* NavigationChild.swift in Sources */,
+				6F2D5118285CFF69002EB630 /* MenuNavigationType.swift in Sources */,
+				6F2D5114285CFB55002EB630 /* SectionChild.swift in Sources */,
 				6F2D50D9285BC2EC002EB630 /* SceneDelegate.swift in Sources */,
 				6F2D511A285CFF75002EB630 /* MenuSection.swift in Sources */,
 				6F2D5116285CFB89002EB630 /* Navigation.swift in Sources */,

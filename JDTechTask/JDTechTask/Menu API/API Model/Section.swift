@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct NavigationSection: Decodable {
+struct Section: Decodable {
     let name: String
     let navigation: Navigation
-    let children: [NavigationChild]?
+    let children: [SectionChild]?
     
     func transform() -> MenuSection {
         

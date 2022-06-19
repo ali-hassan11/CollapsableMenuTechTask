@@ -13,7 +13,7 @@ class NavigationSectionDecodableTests: XCTestCase {
     func testNavigationSectionDecodesCorrectly() throws {
         let decoder = JSONDecoder()
         
-        let decodedData = try decoder.decode(NavigationSection.self, from: cannedNavigationSection)
+        let decodedData = try decoder.decode(Section.self, from: cannedNavigationSection)
         let firstChild = try XCTUnwrap(decodedData.children?.first)
         let lastChild = try XCTUnwrap(decodedData.children?.last)
         

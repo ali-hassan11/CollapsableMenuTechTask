@@ -11,7 +11,7 @@ import XCTest
 class MenuNavigatorTests: XCTestCase {
 
     func testLinkIsHandled() {
-        let navigationItem = MenuNavigation(type: .link, target: nil, URI: "testURL")
+        let navigationItem = MenuNavigation(type: .link, search: nil, target: nil, URI: nil)
         
         let mockNavigator = MockNavigator()
         mockNavigator.navigate(to: navigationItem)
@@ -25,7 +25,7 @@ class MenuNavigatorTests: XCTestCase {
     }
     
     func testNoLinkIsHandled() {
-        let navigationItem = MenuNavigation(type: .noLink, target: nil, URI: "testURL")
+        let navigationItem = MenuNavigation(type: .noLink, search: nil, target: nil, URI: nil)
         
         let mockNavigator = MockNavigator()
         mockNavigator.navigate(to: navigationItem)
@@ -36,10 +36,11 @@ class MenuNavigatorTests: XCTestCase {
         XCTAssertEqual(mockNavigator.infoPageHandled, false)
         XCTAssertEqual(mockNavigator.customHandled, false)
         XCTAssertEqual(mockNavigator.unknownHandled, false)
+        XCTAssertEqual(mockNavigator.searchHandled, false)
     }
     
     func testCategoryIsHandled() {
-        let navigationItem = MenuNavigation(type: .category, target: nil, URI: "testURL")
+        let navigationItem = MenuNavigation(type: .category, search: nil, target: nil, URI: nil)
         
         let mockNavigator = MockNavigator()
         mockNavigator.navigate(to: navigationItem)
@@ -50,10 +51,11 @@ class MenuNavigatorTests: XCTestCase {
         XCTAssertEqual(mockNavigator.infoPageHandled, false)
         XCTAssertEqual(mockNavigator.customHandled, false)
         XCTAssertEqual(mockNavigator.unknownHandled, false)
+        XCTAssertEqual(mockNavigator.searchHandled, false)
     }
     
     func testInfoPageIsHandled() {
-        let navigationItem = MenuNavigation(type: .infoPage, target: nil, URI: "testURL")
+        let navigationItem = MenuNavigation(type: .infoPage, search: nil, target: nil, URI: nil)
         
         let mockNavigator = MockNavigator()
         mockNavigator.navigate(to: navigationItem)
@@ -64,10 +66,11 @@ class MenuNavigatorTests: XCTestCase {
         XCTAssertEqual(mockNavigator.linkHandled, false)
         XCTAssertEqual(mockNavigator.customHandled, false)
         XCTAssertEqual(mockNavigator.unknownHandled, false)
+        XCTAssertEqual(mockNavigator.searchHandled, false)
     }
     
     func testCustomIsHandled() {
-        let navigationItem = MenuNavigation(type: .custom, target: nil, URI: "testURL")
+        let navigationItem = MenuNavigation(type: .custom, search: nil, target: nil, URI: nil)
         
         let mockNavigator = MockNavigator()
         mockNavigator.navigate(to: navigationItem)
@@ -78,10 +81,11 @@ class MenuNavigatorTests: XCTestCase {
         XCTAssertEqual(mockNavigator.infoPageHandled, false)
         XCTAssertEqual(mockNavigator.linkHandled, false)
         XCTAssertEqual(mockNavigator.unknownHandled, false)
+        XCTAssertEqual(mockNavigator.searchHandled, false)
     }
     
     func testUnknownHandled() {
-        let navigationItem = MenuNavigation(type: .unknown, target: nil, URI: "testURL")
+        let navigationItem = MenuNavigation(type: .unknown, search: nil, target: nil, URI: nil)
         
         let mockNavigator = MockNavigator()
         mockNavigator.navigate(to: navigationItem)
@@ -92,17 +96,34 @@ class MenuNavigatorTests: XCTestCase {
         XCTAssertEqual(mockNavigator.infoPageHandled, false)
         XCTAssertEqual(mockNavigator.customHandled, false)
         XCTAssertEqual(mockNavigator.linkHandled, false)
+        XCTAssertEqual(mockNavigator.searchHandled, false)
+    }
+    
+    func testSearchHandled() {
+        let navigationItem = MenuNavigation(type: .search, search: nil, target: nil, URI: nil)
+        
+        let mockNavigator = MockNavigator()
+        mockNavigator.navigate(to: navigationItem)
+        
+        XCTAssertEqual(mockNavigator.searchHandled, true)
+        XCTAssertEqual(mockNavigator.noLinkHandled, false)
+        XCTAssertEqual(mockNavigator.categoryHandled, false)
+        XCTAssertEqual(mockNavigator.infoPageHandled, false)
+        XCTAssertEqual(mockNavigator.customHandled, false)
+        XCTAssertEqual(mockNavigator.linkHandled, false)
+        XCTAssertEqual(mockNavigator.unknownHandled, false)
     }
 
 }
 
 class MockNavigator: NavigatorProtocol {
-    
+
     var linkHandled = false
     var noLinkHandled = false
     var categoryHandled = false
     var infoPageHandled = false
     var customHandled = false
+    var searchHandled = false
     var unknownHandled = false
     
     func navigate(to navigationItem: MenuNavigation) {
@@ -118,6 +139,8 @@ class MockNavigator: NavigatorProtocol {
             self.infoPageHandled = true
         case .custom:
             self.customHandled = true
+        case .search:
+            self.searchHandled = true
         case .unknown:
             self.unknownHandled = true
         }

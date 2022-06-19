@@ -8,7 +8,7 @@
 import Foundation
 
 struct MenuNavigation {
-    let type: NavigationType
+    let type: MenuNavigationType
     let search: String?
     let target: String?
     let URI: String?

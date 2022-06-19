@@ -13,7 +13,7 @@ class NavigationChildDecodableTests: XCTestCase {
     func testNavigationChildDecodesCorrectly() throws {
         let decoder = JSONDecoder()
         
-        let decodedData = try decoder.decode(NavigationChild.self, from: cannedNavigationChild)
+        let decodedData = try decoder.decode(SectionChild.self, from: cannedNavigationChild)
         
         XCTAssertEqual(decodedData.name, "Latest Mens")
         XCTAssertEqual(decodedData.navigation.type, "CATEGORY")

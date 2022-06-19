@@ -11,7 +11,7 @@ protocol NavigatorProtocol {
     func navigate(to navigationItem: MenuNavigation)
 }
 
-struct MenuNavigator {
+struct MenuNavigator: NavigatorProtocol {
     
     let navigationController: UINavigationController
     
@@ -20,18 +20,18 @@ struct MenuNavigator {
         switch navigationItem.type {
         case .link:
             pushWebPage(uri: navigationItem.URI)
-        case .noLink:
-            print("noLink")
         case .category:
             pushWebPage(uri: navigationItem.URI)
+        case .search:
+            pushWebPage(uri: navigationItem.URI)
+        case .noLink:
+            print("No link")
         case .infoPage:
             guard let target = navigationItem.target else { return }
             print("Navigate to target: \(target)")
         case .custom:
             guard let target = navigationItem.target else { return }
             print("Navigate to target: \(target)")
-        case .search:
-            pushWebPage(uri: navigationItem.URI)
         case .unknown:
             fatalError("Unkown navigation type: Unable to handle")
         }
