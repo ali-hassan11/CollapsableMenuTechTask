@@ -9,7 +9,6 @@ import Foundation
 
 struct MenuSectionChild {
     let name: String
-    
     var isOpended: Bool = false
     let navigation: MenuNavigation
 }
